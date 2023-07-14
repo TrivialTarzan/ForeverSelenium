@@ -7,7 +7,7 @@ import org.openqa.selenium.support.PageFactory;
 
 import java.util.List;
 
-public class MainPageMyStore {
+public class MainPage {
 
     private final WebDriver driver;
 
@@ -27,7 +27,7 @@ public class MainPageMyStore {
     @FindBy(css = "input[type='search'].search-keyword")
     private WebElement searchBar;
 
-    public MainPageMyStore(WebDriver driver) {
+    public MainPage(WebDriver driver) {
         this.driver = driver;
         PageFactory.initElements(driver, this);
     }

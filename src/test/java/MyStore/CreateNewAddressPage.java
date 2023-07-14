@@ -5,7 +5,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-public class CreateNewAddressPageMyStore {
+public class CreateNewAddressPage {
 
     private final WebDriver driver;
 
@@ -30,7 +30,7 @@ public class CreateNewAddressPageMyStore {
     @FindBy(className = "form-control-submit")
     private WebElement saveButton;
 
-    public CreateNewAddressPageMyStore(WebDriver driver) {
+    public CreateNewAddressPage(WebDriver driver) {
         this.driver = driver;
         PageFactory.initElements(driver, this);
     }

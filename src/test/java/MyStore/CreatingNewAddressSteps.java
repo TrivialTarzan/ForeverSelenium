@@ -18,11 +18,11 @@ public class CreatingNewAddressSteps {
 
     private final String URL = "https://mystore-testlab.coderslab.pl";
 
-    private AccountPageMyStore accountPage;
+    private AccountPage accountPage;
 
-    private CreateNewAddressPageMyStore createNewAddressPage;
+    private CreateNewAddressPage createNewAddressPage;
 
-    private AddressesPageMyStore addressesPage;
+    private AddressesPage addressesPage;
 
     @Given("I'm on the main page")
     public void navigateToMainPage() {
@@ -34,16 +34,16 @@ public class CreatingNewAddressSteps {
 
     @And("^I'm logged into my account with email: (.*) and password: (.*)$")
     public void logIntoAccount(String email, String password) {
-        MainPageMyStore mainPage = new MainPageMyStore(driver);
+        MainPage mainPage = new MainPage(driver);
         mainPage.clickOnSignInButton();
 
-        LoginPageMyStore loginPage = new LoginPageMyStore(driver);
+        LoginPage loginPage = new LoginPage(driver);
         loginPage.loginAs(email, password);
     }
 
     @Then("^I verify that the name: (.*) is displayed on the screen$")
     public void verifyNameDisplayedOnScreen(String name) {
-        accountPage = new AccountPageMyStore(driver);
+        accountPage = new AccountPage(driver);
         assertTrue(accountPage.verifyDisplayedFullName(name));
     }
 
@@ -52,14 +52,14 @@ public class CreatingNewAddressSteps {
     public void navigateToAddressTab() {
         accountPage.goToAddressTab();
 
-        addressesPage = new AddressesPageMyStore(driver);
+        addressesPage = new AddressesPage(driver);
         addressesPage.navigateToCreateNewAddressPage();
     }
 
     @When("^I fill out the form with following credentials: (.*), (.*), (.*), (.*), (.*), (.*)$")
     public void fillTheForm(
             String alias, String company, String address, String city, String zipCode, String phone) {
-        createNewAddressPage = new CreateNewAddressPageMyStore(driver);
+        createNewAddressPage = new CreateNewAddressPage(driver);
         createNewAddressPage.fillOutForm(alias, company, address, city, zipCode, phone);
     }
 

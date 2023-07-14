@@ -5,7 +5,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-public class LoginPageMyStore {
+public class LoginPage {
 
     private final WebDriver driver;
 
@@ -18,7 +18,7 @@ public class LoginPageMyStore {
     @FindBy(id = "submit-login")
     private WebElement submitButton;
 
-    public LoginPageMyStore(WebDriver driver) {
+    public LoginPage(WebDriver driver) {
         this.driver = driver;
         PageFactory.initElements(driver, this);
     }

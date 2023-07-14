@@ -7,7 +7,7 @@ import org.openqa.selenium.support.PageFactory;
 
 import java.util.List;
 
-public class AddressesPageMyStore {
+public class AddressesPage {
 
     private final WebDriver driver;
 
@@ -17,7 +17,7 @@ public class AddressesPageMyStore {
     @FindBy(className = "address-body")
     private List<WebElement> listOfAddedAddresses;
 
-    public AddressesPageMyStore(WebDriver driver) {
+    public AddressesPage(WebDriver driver) {
         this.driver = driver;
         PageFactory.initElements(driver, this);
     }
