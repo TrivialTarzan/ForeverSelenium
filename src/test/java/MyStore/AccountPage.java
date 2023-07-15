@@ -10,7 +10,7 @@ public class AccountPage {
 
     private final WebDriver driver;
 
-    @FindBy(xpath = "//span[text()='Addresses']")
+    @FindBy(xpath = "//span[text()='\n" + "            Addresses\n" + "          ']")
     private WebElement addressTab;
 
 

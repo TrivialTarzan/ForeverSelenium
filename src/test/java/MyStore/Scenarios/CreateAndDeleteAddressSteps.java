@@ -1,5 +1,6 @@
-package MyStore;
+package MyStore.Scenarios;
 
+import MyStore.*;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -12,7 +13,7 @@ import java.time.Duration;
 import static org.junit.jupiter.api.Assertions.*;
 
 
-public class CreatingNewAddressSteps {
+public class CreateAndDeleteAddressSteps {
 
     private WebDriver driver;
 
@@ -68,10 +69,21 @@ public class CreatingNewAddressSteps {
         createNewAddressPage.saveChanges();
     }
 
-    @Then("I verify if the added address contains the correct credentials")
+    @Then("I verify if the added address contains the correct " +
+            "credentials: (.*), (.*), (.*), (.*), (.*), (.*)$")
     public void verifyIfCredentialsAreCorrect(
             String alias, String company, String address, String city, String zipCode, String phone) {
         assertTrue(addressesPage.verifyIfAddressAdded(alias, company, address, city, zipCode, phone));
     }
 
+    @Then("I delete the address and verify it was successfully deleted")
+    public void deleteAddressAndVerifyItWasDeleted() {
+        addressesPage.deleteAddresses();
+        assertEquals(1, addressesPage.checkNumberOfAddresses());
+    }
+
+    @And("I close the browser")
+    public void iCloseTheBrowser() {
+        driver.close();
+    }
 }
