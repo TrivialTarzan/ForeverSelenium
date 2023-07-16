@@ -3,13 +3,13 @@ package MyStore.Scenarios;
 import MyStore.AccountPage;
 import MyStore.LoginPage;
 import MyStore.MainPage;
+import MyStore.SearchResultPage;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import org.junit.jupiter.api.BeforeAll;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -47,6 +47,14 @@ public class SuccessfulPurchaseSteps {
     }
 
     @Then("^I search for the product: (.*)$")
-    public void searchForProduct() {
+    public void searchForProduct(String productName) {
+        mainPage.findProduct(productName);
+
+    }
+
+    @And("^I verify the product: (.*) is displayed on the screen$")
+    public void verifyProductIsDisplayed(String productName) {
+        SearchResultPage searchResultPage = new SearchResultPage(driver);
+        assertTrue(searchResultPage.verifyProductIsDisplayed(productName));
     }
 }

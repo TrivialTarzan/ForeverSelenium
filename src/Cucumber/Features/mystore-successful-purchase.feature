@@ -11,6 +11,7 @@ Feature: Performing successful/unsuccessful purchase
     Given I log into my account with email: <email> and password: <password>
     And I verify that my name: <fullName> is displayed on the screen
     Then I search for the product: <productName>
+    And I verify the product: <productName> is displayed on the screen
 
 
     And I close the browser

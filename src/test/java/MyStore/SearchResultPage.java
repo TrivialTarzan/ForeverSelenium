@@ -1,5 +1,6 @@
 package MyStore;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -17,9 +18,15 @@ public class SearchResultPage {
     @FindBy(className = "product-thumbnail")
     private List<WebElement> listOfProducts;
 
+
     public SearchResultPage(WebDriver driver) {
         this.driver = driver;
         PageFactory.initElements(driver, this);
+    }
+
+    public boolean verifyProductIsDisplayed(String productName) {
+       WebElement product = driver.findElement(By.linkText(productName));
+       return product.isDisplayed();
     }
 
     public void selectProduct() {

@@ -19,7 +19,7 @@ public class CreateAndDeleteAddressSteps {
 
     private final String URL = "https://mystore-testlab.coderslab.pl";
 
-    private AccountPage accountPage;
+    private MainPage mainPage;
 
     private CreateNewAddressPage createNewAddressPage;
 
@@ -35,7 +35,7 @@ public class CreateAndDeleteAddressSteps {
 
     @And("^I'm logged into my account with email: (.*) and password: (.*)$")
     public void logIntoAccount(String email, String password) {
-        MainPage mainPage = new MainPage(driver);
+        mainPage = new MainPage(driver);
         mainPage.clickOnSignInButton();
 
         LoginPage loginPage = new LoginPage(driver);
@@ -44,13 +44,14 @@ public class CreateAndDeleteAddressSteps {
 
     @Then("^I verify that the name: (.*) is displayed on the screen$")
     public void verifyNameDisplayedOnScreen(String name) {
-        accountPage = new AccountPage(driver);
-        assertTrue(accountPage.verifyDisplayedFullName(name));
+        mainPage = new MainPage(driver);
+        assertTrue(mainPage.verifyDisplayedFullName(name));
     }
 
 
     @And("I navigate to 'Address' tab and click on 'Create new address' button")
     public void navigateToAddressTab() {
+        AccountPage accountPage = new AccountPage(driver);
         accountPage.goToAddressTab();
 
         addressesPage = new AddressesPage(driver);
