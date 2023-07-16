@@ -57,4 +57,8 @@ public class SuccessfulPurchaseSteps {
         SearchResultPage searchResultPage = new SearchResultPage(driver);
         assertTrue(searchResultPage.verifyProductIsDisplayed(productName));
     }
+
+    @Then("^I navigate to the product page and I check if the discount on the product is (.*)$")
+    public void navigateToProductPageAndCheckDiscount(String discount) {
+    }
 }

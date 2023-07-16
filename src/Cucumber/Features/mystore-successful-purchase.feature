@@ -12,6 +12,7 @@ Feature: Performing successful/unsuccessful purchase
     And I verify that my name: <fullName> is displayed on the screen
     Then I search for the product: <productName>
     And I verify the product: <productName> is displayed on the screen
+    Then I navigate to the product page and I check if the discount on the product is <discount>
 
 
     And I close the browser
