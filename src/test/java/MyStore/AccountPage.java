@@ -10,20 +10,13 @@ public class AccountPage {
 
     private final WebDriver driver;
 
-    @FindBy(xpath = "//span[text()='\n" + "            Addresses\n" + "          ']")
+    @FindBy(xpath = "//span[text()='\n            Addresses\n          ']")
     private WebElement addressTab;
 
 
     public AccountPage(WebDriver driver) {
         this.driver = driver;
         PageFactory.initElements(driver, this);
-    }
-
-    public boolean verifyDisplayedFullName(String expectedName) {
-        WebElement name = driver.findElement(
-                By.xpath("//span[text()='" + expectedName + "']")
-        );
-        return name.isDisplayed();
     }
 
     public void goToAddressTab() {

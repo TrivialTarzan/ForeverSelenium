@@ -1,5 +1,5 @@
 @my-store
-Feature: Testing key functionalities of the MyStore website
+Feature: Adding and deleting an address from the account
 
   Background:
     1. I have an active account.
@@ -20,5 +20,6 @@ Feature: Testing key functionalities of the MyStore website
     And I close the browser
 
     Examples:
-      | email                | password| full name           | alias   | company | address  | city | zip code| phone   |
-      | rabarbea@whatfor.com | Whatfor | Rabarbeata Gibberish| Rabarbea| GerTrans| Hoan Kiem| Hanoi| 00120   | +84 666 |
+      | email                | password| full name           | alias   | company | address     | city  | zip code| phone      |
+      | rabarbea@whatfor.com | Whatfor | Rabarbeata Gibberish| Rabarbea| GerTrans| Hoan Kiem   | Hanoi | 00120   | +84 666    |
+      | corruptedmind@die.net| Modulo  | Kristian Vikernes   | Varg    | Burzum  | Hordaland 51| Bergen| 5003    | +47 265 356|

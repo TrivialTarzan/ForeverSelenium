@@ -1,5 +1,6 @@
 package MyStore;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -18,13 +19,7 @@ public class MainPage {
     @FindBy(className = "cart-count")
     private List<WebElement> checkQuantityTagEnabled;
 
-    @FindBy(className = "empty-cart")
-    private List<WebElement> isCartEmpty;
-
-    @FindBy(className = "cart-icon")
-    private WebElement cartIcon;
-
-    @FindBy(css = "input[type='search'].search-keyword")
+    @FindBy(xpath = "//input[aria-label='Search']")
     private WebElement searchBar;
 
     public MainPage(WebDriver driver) {
@@ -32,9 +27,19 @@ public class MainPage {
         PageFactory.initElements(driver, this);
     }
 
+    public boolean verifyDisplayedFullName(String expectedName) {
+        WebElement name = driver.findElement(
+                By.xpath("//span[text()='" + expectedName + "']")
+        );
+        return name.isDisplayed();
+    }
 
     public void clickOnSignInButton() {
         signInElement.click();
     }
 
+    public void findProduct(String productName) {
+        searchBar.clear();
+        searchBar.sendKeys(productName);
+    }
 }
