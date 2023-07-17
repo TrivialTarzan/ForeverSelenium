@@ -32,4 +32,5 @@ public class SearchResultPage {
     public void selectProduct() {
         productElement.click();
     }
+
 }
