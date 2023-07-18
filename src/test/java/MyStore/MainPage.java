@@ -5,6 +5,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.Keys;
 
 import java.util.List;
 
@@ -19,7 +20,7 @@ public class MainPage {
     @FindBy(className = "cart-count")
     private List<WebElement> checkQuantityTagEnabled;
 
-    @FindBy(xpath = "//input[aria-label='Search']")
+    @FindBy(xpath = "//input[@aria-label='Search']")
     private WebElement searchBar;
 
     public MainPage(WebDriver driver) {
@@ -41,5 +42,6 @@ public class MainPage {
     public void findProduct(String productName) {
         searchBar.clear();
         searchBar.sendKeys(productName);
+        searchBar.sendKeys(Keys.RETURN);
     }
 }

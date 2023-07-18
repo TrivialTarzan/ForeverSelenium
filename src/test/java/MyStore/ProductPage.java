@@ -16,6 +16,9 @@ public class ProductPage {
     @FindBy(className = "form-control-select")
     private WebElement sizeDropdown;
 
+    @FindBy(className = "control-label")
+    private WebElement sizeTextElement;
+
     @FindBy(css = "a[aria-controls='product-details']")
     private WebElement productDetailsElement;
 
@@ -24,6 +27,15 @@ public class ProductPage {
 
     @FindBy(css = "span[data-stock]")
     private WebElement availableStockElement;
+
+    @FindBy(className = "touchspin-up")
+    private WebElement increaseQuantityButton;
+
+    @FindBy(className = "touchspin-down")
+    private WebElement decreaseQuantityButton;
+
+    @FindBy(id = "quantity_wanted")
+    private WebElement quantityInputElement;
 
     public ProductPage(WebDriver driver) {
         this.driver = driver;
@@ -41,9 +53,33 @@ public class ProductPage {
     public void chooseSize(String size) {
         sizeDropdown.click();
 
-        WebElement sizeElement = driver.findElement(By.xpath("//option[title='" + size + "']"));
+        WebElement sizeElement = driver.findElement(By.xpath("//option[@title='" + size + "']"));
         if (sizeElement.isEnabled()) {
             sizeElement.click();
+        }
+    }
+
+    public boolean isSizeCorrect(String expectedSize) {
+        System.out.println(sizeTextElement.getText());
+        return sizeTextElement.getText().contains(expectedSize);
+    }
+
+    public String getQuantity() {
+        return quantityInputElement.getAttribute("value");
+    }
+
+    public void adjustQuantity(String quantity) {
+        int desiredQuantity = Integer.parseInt(quantity);
+        int displayedQuantity = Integer.parseInt(getQuantity());
+
+        if (desiredQuantity > displayedQuantity) {
+            for (int i = displayedQuantity; i < desiredQuantity; i++) {
+                increaseQuantityButton.click();
+            }
+        } else if ( displayedQuantity > desiredQuantity) {
+            for (int i = displayedQuantity - 1; i > desiredQuantity; i--) {
+                decreaseQuantityButton.click();
+            }
         }
     }
 

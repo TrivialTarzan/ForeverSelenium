@@ -58,14 +58,18 @@ public class SuccessfulPurchaseSteps {
         assertTrue(productPage.isDiscountValueCorrect(discount));
     }
 
-    @Then("^I choose the desired size: (.*) and (.*)$")
-    public void chooseSize(String size) {
+    @Then("^I choose the desired size: (.*) and quantity: (.*)$")
+    public void chooseSize(String size, String quantity) {
         productPage.chooseSize(size);
+        assertTrue(productPage.isSizeCorrect(size));
+
+        productPage.adjustQuantity(quantity);
+        assertEquals(quantity, productPage.getQuantity());
     }
 
-    @Then("^I check the material composition of the product is: (.*)$")
+    @Then("^I check if the material composition of the product is: (.*)$")
     public void checkMaterialCompositionOfProduct(String expectedMaterial) {
-        assertEquals(expectedMaterial, productPage.getMaterialComposition());
+        assertEquals(expectedMaterial, productPage.getMaterialComposition(), expectedMaterial + " " + productPage.getMaterialComposition());
     }
 
     @And("^I verify that there are more than (.*) items available in stock$")

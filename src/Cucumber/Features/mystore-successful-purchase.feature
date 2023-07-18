@@ -13,8 +13,8 @@ Feature: Performing successful/unsuccessful purchase
     And I search for the product: <productName>
     And I verify the product: <productName> is displayed on the screen
     Then I navigate to the product page, check if the discount is displayed and equals: <discount>
-    And I choose the desired size: <size> and <quantity>
-    Then I check the material composition of the product is: <material>
+    And I choose the desired size: <size> and quantity: <quantity>
+    Then I check if the material composition of the product is: <material>
     And I verify that there are more than <stock> items available in stock
 
 
