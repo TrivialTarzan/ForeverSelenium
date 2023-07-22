@@ -16,6 +16,9 @@ Feature: Performing successful/unsuccessful purchase
     And I choose the desired size: <size> and quantity: <quantity>
     Then I check if the material composition of the product is: <material>
     And I verify that there are more than <stock> items available in stock
+    Then I add the product to the cart
+    Then I proceed to checkout
+    And verify the price for the <quantity> products matches the total price
 
 
 
@@ -23,5 +26,5 @@ Feature: Performing successful/unsuccessful purchase
 
     Examples:
       |email               | password| productName                |discount|size |quantity| material| stock|
-      |corruptedmind@die.net| Modulo | Hummingbird Printed Sweater| 20%     | M   | 5     | cotton  | 1000 |
-#      |rabarbea@whatfor.com| Whatfor| Hummingbird Printed Sweater| 20%     | XL | 20     |         |  |
+      |corruptedmind@die.net| Modulo | Hummingbird Printed Sweater| 20%     | M   | 5     | Cotton  | 1000 |
+#      |rabarbea@whatfor.com| Whatfor| Hummingbird Printed Sweater| 20%     | XL | 20     |         |      |                        |

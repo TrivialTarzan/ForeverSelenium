@@ -4,11 +4,9 @@ import MyStore.*;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
-import org.junit.jupiter.api.BeforeAll;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
-import java.time.Duration;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -21,6 +19,7 @@ public class SuccessfulPurchaseSteps {
     private MainPage mainPage;
     private SearchResultPage searchResultPage;
     private ProductPage productPage;
+    private CheckoutPage checkoutPage;
 
     @Given("I am on the main page")
     public void navigateToMainPage() {
@@ -60,20 +59,42 @@ public class SuccessfulPurchaseSteps {
 
     @Then("^I choose the desired size: (.*) and quantity: (.*)$")
     public void chooseSize(String size, String quantity) {
+        productPage = new ProductPage(driver);
         productPage.chooseSize(size);
-        assertTrue(productPage.isSizeCorrect(size));
-
         productPage.adjustQuantity(quantity);
+
         assertEquals(quantity, productPage.getQuantity());
+        assertTrue(productPage.isSizeCorrect(size), "Incorrect size");
     }
 
     @Then("^I check if the material composition of the product is: (.*)$")
     public void checkMaterialCompositionOfProduct(String expectedMaterial) {
+        productPage = new ProductPage(driver);
+        productPage.selectProductDetails();
         assertEquals(expectedMaterial, productPage.getMaterialComposition(), expectedMaterial + " " + productPage.getMaterialComposition());
     }
 
     @And("^I verify that there are more than (.*) items available in stock$")
     public void verifyAvailableStockGreaterThan(int minimalStock) {
-        assertTrue(productPage.availableStock() > minimalStock);
+        productPage = new ProductPage(driver);
+        assertTrue(productPage.getAvailableStock() > minimalStock);
+    }
+
+    @Then("I add the product to the cart")
+    public void addProductToCart() {
+        productPage = new ProductPage(driver);
+        productPage.addToCart();
+    }
+
+    @Then("I proceed to checkout")
+    public void iProceedToCheckout() {
+        CheckoutPopup checkoutPopup = new CheckoutPopup(driver);
+        checkoutPopup.proceedToCheckout();
+    }
+
+    @And("^verify the price for the (.*) products matches the total price$")
+    public void verifyPriceForProductsMatchesTotalPrice(String quantity) {
+        checkoutPage = new CheckoutPage(driver);
+        assertTrue(checkoutPage.verifyIfPriceIsCorrect(quantity));
     }
 }

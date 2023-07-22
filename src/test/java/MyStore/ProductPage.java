@@ -1,14 +1,24 @@
 package MyStore;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.time.Duration;
 
 public class ProductPage {
 
     private final WebDriver driver;
+
+    private final WebDriverWait wait;
+
+    @FindBy(className = "add-to-cart")
+    private WebElement addToCartButton;
 
     @FindBy(className = "discount-percentage")
     private WebElement discountElement;
@@ -39,7 +49,16 @@ public class ProductPage {
 
     public ProductPage(WebDriver driver) {
         this.driver = driver;
+        this.wait = new WebDriverWait(driver, Duration.ofSeconds(3));
         PageFactory.initElements(driver, this);
+    }
+
+    private void waitForElement() {
+        try {
+            Thread.sleep(200);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     public boolean verifyDiscountIsDisplayed() {
@@ -60,7 +79,11 @@ public class ProductPage {
     }
 
     public boolean isSizeCorrect(String expectedSize) {
-        System.out.println(sizeTextElement.getText());
+        WebElement expectedElement = driver.findElement(
+                By.xpath("//span[contains(text(), '" + expectedSize + "')]"));
+
+        wait.until(ExpectedConditions.visibilityOf(expectedElement));
+
         return sizeTextElement.getText().contains(expectedSize);
     }
 
@@ -73,25 +96,42 @@ public class ProductPage {
         int displayedQuantity = Integer.parseInt(getQuantity());
 
         if (desiredQuantity > displayedQuantity) {
-            for (int i = displayedQuantity; i < desiredQuantity; i++) {
+            for (int i = displayedQuantity; i <= desiredQuantity; i++) {
                 increaseQuantityButton.click();
+                waitForElement();
             }
         } else if ( displayedQuantity > desiredQuantity) {
-            for (int i = displayedQuantity - 1; i > desiredQuantity; i--) {
+            for (int i = displayedQuantity - 1; i >= desiredQuantity; i--) {
                 decreaseQuantityButton.click();
+                waitForElement();
             }
         }
     }
 
-    public String getMaterialComposition() {
+    public void changeQuantity(String quantity) {
+        quantityInputElement.clear();
+        quantityInputElement.sendKeys(quantity);
+    }
+
+    public void selectProductDetails() {
         productDetailsElement.click();
-        return materialCompositionElement.getText();
     }
 
-    public int availableStock() {
-        String stockText = availableStockElement.getText();
-        String extractedStockNumber = stockText.replace("[^0-9]", "");
-
-        return Integer.parseInt(extractedStockNumber);
+    public String getMaterialComposition() {
+        return materialCompositionElement.getAttribute("innerText");
     }
+
+    public int getAvailableStock() {
+        return Integer.parseInt(availableStockElement.getAttribute("data-stock"));
+    }
+
+    public void addToCart() {
+        try {
+            addToCartButton.click();
+        } catch (StaleElementReferenceException e) {
+            addToCartButton = driver.findElement(By.className("add-to-cart"));
+            addToCartButton.click();
+        }
+    }
+
 }
