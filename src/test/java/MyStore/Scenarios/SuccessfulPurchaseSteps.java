@@ -13,7 +13,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class SuccessfulPurchaseSteps {
 
-    private WebDriver driver;
+    private final WebDriver driver;
     private final String URL = "https://mystore-testlab.coderslab.pl";
     private AccountPage accountPage;
     private MainPage mainPage;

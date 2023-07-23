@@ -7,10 +7,10 @@ import org.openqa.selenium.chrome.ChromeDriver;
 
 import java.time.Duration;
 
-/*
-This class was created to prevent triggering every @Before and @After Cucumber fixtures,
-which caused opening of multiple browser windows, even when only one scenario was being executed
- */
+/**
+* This class was created to prevent triggering multiple @Before and @After Cucumber fixtures,
+* which caused the opening of multiple browser windows, even when only one scenario was being executed
+ **/
 
 public class WebDriverHooks {
 
