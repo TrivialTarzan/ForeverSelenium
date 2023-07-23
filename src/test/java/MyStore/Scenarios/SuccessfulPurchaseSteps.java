@@ -1,6 +1,7 @@
 package MyStore.Scenarios;
 
 import MyStore.*;
+import MyStore.Screenshots.Screenshot;
 import MyStore.WebDriverHooks.WebDriverHooks;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
@@ -15,11 +16,14 @@ public class SuccessfulPurchaseSteps {
 
     private final WebDriver driver;
     private final String URL = "https://mystore-testlab.coderslab.pl";
+    private String screenshotPath = "src/test/java/MyStore/Screenshots/SavedScreenshots";
     private AccountPage accountPage;
     private MainPage mainPage;
     private SearchResultPage searchResultPage;
     private ProductPage productPage;
     private CheckoutPage checkoutPage;
+    private OrderConfirmationPage orderConfirmationPage;
+    private String orderAmount;
 
 
     public SuccessfulPurchaseSteps(WebDriverHooks hooks) {
@@ -95,5 +99,24 @@ public class SuccessfulPurchaseSteps {
     public void verifyPriceForProductsMatchesTotalPrice(String price, String quantity) {
         checkoutPage = new CheckoutPage(driver);
         assertTrue(checkoutPage.verifyPriceCorrect(price, quantity));
+    }
+
+    @Then("^I select (.*) payment method and confirm my order$")
+    public void selectPaymentMethodAndConfirmOrder(String paymentMethod) {
+        checkoutPage.proceedToOrderConfirmationPage();
+
+        orderConfirmationPage = new OrderConfirmationPage(driver);
+        orderConfirmationPage.confirmPersonalInformation();
+        orderConfirmationPage.confirmAddress();
+        orderConfirmationPage.confirmShippingMethod();
+        orderConfirmationPage.selectPaymentMethod(paymentMethod);
+        orderAmount = orderConfirmationPage.getOrderAmount();
+        orderConfirmationPage.agreeToTermsOfService();
+        orderConfirmationPage.placeOrder();
+    }
+
+    @And("I take a screenshot with a confirmation that my order was placed successfully")
+    public void takeScreenshotWithConfirmationThatOrderWasPlacedSuccessfully() {
+        Screenshot.takeScreenshot(driver, screenshotPath);
     }
 }

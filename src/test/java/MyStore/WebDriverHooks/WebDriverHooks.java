@@ -23,10 +23,10 @@ public class WebDriverHooks {
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
     }
 
-    @After
-    public void tearDown() {
-        driver.quit();
-    }
+//    @After
+//    public void tearDown() {
+//        driver.quit();
+//    }
 
     public WebDriver getDriver() {
         return driver;

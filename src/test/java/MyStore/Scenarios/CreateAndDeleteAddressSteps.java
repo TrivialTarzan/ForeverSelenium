@@ -18,7 +18,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class CreateAndDeleteAddressSteps {
 
-    private WebDriver driver;
+    private final WebDriver driver;
     private final String URL = "https://mystore-testlab.coderslab.pl";
     private MainPage mainPage;
     private CreateNewAddressPage createNewAddressPage;

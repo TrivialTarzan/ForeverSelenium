@@ -16,6 +16,10 @@ public class CheckoutPage {
     @FindBy(className = "current-price")
     private WebElement discountPriceElement;
 
+    @FindBy(xpath = "//a[contains(text(),'Proceed to checkout')]")
+    private WebElement checkoutButton;
+
+
     public CheckoutPage(WebDriver driver) {
         this.driver = driver;
         PageFactory.initElements(driver, this);
@@ -28,8 +32,11 @@ public class CheckoutPage {
         return getTotalPrice().contains(expectedPrice);
     }
 
-
     public String getTotalPrice() {
         return totalPriceElement.getText();
+    }
+
+    public void proceedToOrderConfirmationPage() {
+        checkoutButton.click();
     }
 }

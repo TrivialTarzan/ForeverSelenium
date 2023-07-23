@@ -18,9 +18,11 @@ Feature: Performing successful/unsuccessful purchase
     Then I add the product to the cart
     Then I proceed to checkout
     And verify the price <price> for the <quantity> products matches the total price
+    Then I select <paymentMethod> payment method and confirm my order
+    And I take a screenshot with a confirmation that my order was placed successfully
 
 
     Examples:
-      |email               | password| productName                |discount|size |quantity| material| stock| price |
-      |corruptedmind@die.net| Modulo | Hummingbird Printed Sweater| 20%     | M   | 5     | Cotton  | 1000 | 28.72 |
-#      |rabarbea@whatfor.com| Whatfor| Hummingbird Printed Sweater| 20%     | XL | 20     |         |      |       |                |
+      |email               | password| productName                |discount|size |quantity| material| stock| price | paymentMethod   |
+      |corruptedmind@die.net| Modulo | Hummingbird Printed Sweater| 20%     | M   | 5     | Cotton  | 1000 | 28.72 | Pay by Check    |
+#      |rabarbea@whatfor.com| Whatfor| Hummingbird Printed Sweater| 20%     | XL | 20     |         |      |       | Pay by bank wire|
