@@ -2,14 +2,15 @@ package MyStore.WebDriverHooks;
 
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
-import io.cucumber.picocontainer.PicoFactory;
-
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.picocontainer.DefaultPicoContainer;
-import org.picocontainer.MutablePicoContainer;
 
 import java.time.Duration;
+
+/*
+This class was created to prevent triggering every @Before and @After Cucumber fixtures,
+which caused opening of multiple browser windows, even when only one scenario was being executed
+ */
 
 public class WebDriverHooks {
 
@@ -18,14 +19,16 @@ public class WebDriverHooks {
     @Before
     public void setup() {
         driver = new ChromeDriver();
-        MutablePicoContainer pico = new DefaultPicoContainer();
         driver.manage().window().maximize();
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
-        pico.addComponent(WebDriver.class, driver);
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
     }
 
-    @After(order = 0)
+    @After
     public void tearDown() {
         driver.quit();
+    }
+
+    public WebDriver getDriver() {
+        return driver;
     }
 }

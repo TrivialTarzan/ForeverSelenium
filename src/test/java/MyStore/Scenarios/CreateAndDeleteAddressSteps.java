@@ -1,6 +1,7 @@
 package MyStore.Scenarios;
 
 import MyStore.*;
+import MyStore.WebDriverHooks.WebDriverHooks;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import io.cucumber.java.en.And;
@@ -23,20 +24,14 @@ public class CreateAndDeleteAddressSteps {
     private CreateNewAddressPage createNewAddressPage;
     private AddressesPage addressesPage;
 
-    @Before
-    public void setup() {
-        driver = new ChromeDriver();
-        driver.manage().window().maximize();
-        driver.get(URL);
-    }
 
-    @After
-    public void tearDown() {
-        driver.quit();
+    public CreateAndDeleteAddressSteps(WebDriverHooks hooks) {
+        this.driver = hooks.getDriver();
     }
 
     @Given("I'm on the main page")
     public void navigateToMainPage() {
+        driver.get(URL);
         mainPage = new MainPage(driver);
     }
 

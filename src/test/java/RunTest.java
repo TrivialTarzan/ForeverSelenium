@@ -7,7 +7,7 @@ import org.junit.runner.RunWith;
 @CucumberOptions(
         features = "src/Cucumber/Features/",
         plugin = {"pretty","html:out"},
-        tags = "@add-and-delete-address"
+        tags = "@successful-purchase"
 )
 
 public class RunTest {

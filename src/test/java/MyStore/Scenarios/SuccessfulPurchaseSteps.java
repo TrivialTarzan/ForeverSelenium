@@ -1,18 +1,12 @@
 package MyStore.Scenarios;
 
 import MyStore.*;
-import io.cucumber.java.After;
-import io.cucumber.java.Before;
+import MyStore.WebDriverHooks.WebDriverHooks;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import org.junit.BeforeClass;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-
-
-import java.time.Duration;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -28,21 +22,13 @@ public class SuccessfulPurchaseSteps {
     private CheckoutPage checkoutPage;
 
 
-    @BeforeClass
-    public void setup() {
-        driver = new ChromeDriver();
-        driver.manage().window().maximize();
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-        driver.get(URL);
-    }
-
-    @After
-    public void tearDown() {
-        driver.quit();
+    public SuccessfulPurchaseSteps(WebDriverHooks hooks) {
+        this.driver = hooks.getDriver();
     }
 
     @Given("I am on the main page")
     public void navigateToMainPage() {
+        driver.get(URL);
         mainPage = new MainPage(driver);
     }
 
