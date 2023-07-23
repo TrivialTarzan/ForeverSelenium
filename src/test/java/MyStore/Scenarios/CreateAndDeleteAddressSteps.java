@@ -1,6 +1,8 @@
 package MyStore.Scenarios;
 
 import MyStore.*;
+import io.cucumber.java.After;
+import io.cucumber.java.Before;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -16,26 +18,30 @@ import static org.junit.jupiter.api.Assertions.*;
 public class CreateAndDeleteAddressSteps {
 
     private WebDriver driver;
-
     private final String URL = "https://mystore-testlab.coderslab.pl";
-
     private MainPage mainPage;
-
     private CreateNewAddressPage createNewAddressPage;
-
     private AddressesPage addressesPage;
+
+    @Before
+    public void setup() {
+        driver = new ChromeDriver();
+        driver.manage().window().maximize();
+        driver.get(URL);
+    }
+
+    @After
+    public void tearDown() {
+        driver.quit();
+    }
 
     @Given("I'm on the main page")
     public void navigateToMainPage() {
-        driver = new ChromeDriver(); 
-        driver.manage().window().maximize();
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-        driver.get(URL);
+        mainPage = new MainPage(driver);
     }
 
     @And("^I'm logged into my account with email: (.*) and password: (.*)$")
     public void logIntoAccount(String email, String password) {
-        mainPage = new MainPage(driver);
         mainPage.clickOnSignInButton();
 
         LoginPage loginPage = new LoginPage(driver);
@@ -44,7 +50,6 @@ public class CreateAndDeleteAddressSteps {
 
     @Then("^I verify that the name: (.*) is displayed on the screen$")
     public void verifyNameDisplayedOnScreen(String name) {
-        mainPage = new MainPage(driver);
         assertTrue(mainPage.verifyDisplayedFullName(name));
     }
 
@@ -83,8 +88,4 @@ public class CreateAndDeleteAddressSteps {
         assertEquals(1, addressesPage.checkNumberOfAddresses());
     }
 
-    @And("I close the browser")
-    public void iCloseTheBrowser() {
-        driver.close();
-    }
 }

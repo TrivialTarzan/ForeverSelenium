@@ -4,9 +4,10 @@ import io.cucumber.junit.CucumberOptions;
 import org.junit.runner.RunWith;
 
 @RunWith(Cucumber.class)
-
 @CucumberOptions(
-        features = "src/Cucumber/Features/", plugin = {"pretty","html:out"}, tags = "@successful-purchase"
+        features = "src/Cucumber/Features/",
+        plugin = {"pretty","html:out"},
+        tags = "@add-and-delete-address"
 )
 
 public class RunTest {

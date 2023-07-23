@@ -14,7 +14,6 @@ import java.time.Duration;
 public class ProductPage {
 
     private final WebDriver driver;
-
     private final WebDriverWait wait;
 
     @FindBy(className = "add-to-cart")
@@ -53,15 +52,15 @@ public class ProductPage {
         PageFactory.initElements(driver, this);
     }
 
-    private void waitForElement() {
+    private void waitForElement(long miliseconds) {
         try {
-            Thread.sleep(200);
+            Thread.sleep(miliseconds);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
     }
 
-    public boolean verifyDiscountIsDisplayed() {
+    public boolean isDiscountDisplayed() {
         return discountElement.isDisplayed();
     }
 
@@ -98,12 +97,12 @@ public class ProductPage {
         if (desiredQuantity > displayedQuantity) {
             for (int i = displayedQuantity; i <= desiredQuantity; i++) {
                 increaseQuantityButton.click();
-                waitForElement();
+                waitForElement(200);
             }
         } else if ( displayedQuantity > desiredQuantity) {
             for (int i = displayedQuantity - 1; i >= desiredQuantity; i--) {
                 decreaseQuantityButton.click();
-                waitForElement();
+                waitForElement(200);
             }
         }
     }

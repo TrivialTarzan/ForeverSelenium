@@ -17,8 +17,6 @@ Feature: Adding and deleting an address from the account
     Then I verify if the added address contains the correct credentials: <alias>, <company>, <address>, <city>, <zip code>, <phone>
     Then I delete the address and verify it was successfully deleted
 
-    And I close the browser
-
     Examples:
       | email                | password| full name           | alias   | company | address     | city  | zip code| phone      |
       | rabarbea@whatfor.com | Whatfor | Rabarbeata Gibberish| Rabarbea| GerTrans| Hoan Kiem   | Hanoi | 00120   | +84 666    |

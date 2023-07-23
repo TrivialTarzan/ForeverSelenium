@@ -24,7 +24,7 @@ public class SearchResultPage {
         PageFactory.initElements(driver, this);
     }
 
-    public boolean verifyProductIsDisplayed(String productName) {
+    public boolean isProductDisplayed(String productName) {
        WebElement product = driver.findElement(By.linkText(productName));
        return product.isDisplayed();
     }

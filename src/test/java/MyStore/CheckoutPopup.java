@@ -17,8 +17,6 @@ public class CheckoutPopup {
 
     private final WebDriverWait wait;
 
-    private JavascriptExecutor jsExecutor;
-
     @FindBy(xpath = "//a[contains(text(),'Proceed to checkout')]")
     private WebElement checkoutButton;
 
