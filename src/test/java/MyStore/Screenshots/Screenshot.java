@@ -1,6 +1,7 @@
 package MyStore.Screenshots;
 
 import com.assertthat.selenium_shutterbug.core.Capture;
+import com.assertthat.selenium_shutterbug.core.PageSnapshot;
 import com.assertthat.selenium_shutterbug.core.Shutterbug;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.WebDriver;
@@ -36,10 +37,7 @@ public class Screenshot {
     }
 
     public static void takeFullPageScreenshot(WebDriver webdriver, String screenshotPath, String fileName) {
-        try {
-            Shutterbug.shootPage(webdriver, Capture.FULL_SCROLL).save(screenshotPath + "\\" + fileName);
-        } catch (IOException e) {
-            System.err.println("Error occurred while saving the screenshot: " + e.getMessage());
-        }
+        PageSnapshot takeScr = Shutterbug.shootPage(webdriver, Capture.FULL_SCROLL);
+        takeScr.save(screenshotPath + "\\" + fileName);
     }
 }
