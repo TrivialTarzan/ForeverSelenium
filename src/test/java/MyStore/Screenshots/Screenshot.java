@@ -22,10 +22,11 @@ import java.nio.file.Paths;
 
 public class Screenshot {
 
-    public static void takeScreenshot(WebDriver webdriver, String screenshotPath) {
+    public static void takeScreenshot(WebDriver webdriver, String screenshotPath, String fileName) {
 
         File screenshotFile =((TakesScreenshot)webdriver).getScreenshotAs(OutputType.FILE);
-        Path destinationPath = Paths.get(screenshotPath);
+        Path destinationPath = Paths.get(screenshotPath, fileName);
+
         try {
             Files.move(screenshotFile.toPath(), destinationPath);
         } catch (IOException e) {

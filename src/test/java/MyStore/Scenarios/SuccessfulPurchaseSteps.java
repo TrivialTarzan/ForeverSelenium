@@ -9,6 +9,9 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.openqa.selenium.WebDriver;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -117,6 +120,9 @@ public class SuccessfulPurchaseSteps {
 
     @And("I take a screenshot with a confirmation that my order was placed successfully")
     public void takeScreenshotWithConfirmationThatOrderWasPlacedSuccessfully() {
-        Screenshot.takeScreenshot(driver, screenshotPath);
+        LocalDateTime currentDateTime = LocalDateTime.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd_HHmmss");
+        String fileName = currentDateTime.format(formatter) + ".png";
+        Screenshot.takeScreenshot(driver, screenshotPath, fileName);
     }
 }

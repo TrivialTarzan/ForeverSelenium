@@ -42,7 +42,7 @@ public class OrderConfirmationPage {
     @FindBy(id = "conditions_to_approve[terms-and-conditions]")
     private WebElement termsOfServiceChceckbox;
 
-    @FindBy(xpath = "//button[@type='submit']")
+    @FindBy(xpath = "//button[contains(text(), 'Place order')]")
     private WebElement submitButton;
 
     @FindBy(xpath = "//dd[contains(text(), '€')]")
