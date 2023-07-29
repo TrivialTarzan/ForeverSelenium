@@ -1,11 +1,12 @@
 package MyStore.Screenshots;
 
+import com.assertthat.selenium_shutterbug.core.Capture;
+import com.assertthat.selenium_shutterbug.core.Shutterbug;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.TakesScreenshot;
 
 import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -22,7 +23,7 @@ import java.nio.file.Paths;
 
 public class Screenshot {
 
-    public static void takeScreenshot(WebDriver webdriver, String screenshotPath, String fileName) {
+    public static void takeVisibleSegmentScreenshot(WebDriver webdriver, String screenshotPath, String fileName) {
 
         File screenshotFile =((TakesScreenshot)webdriver).getScreenshotAs(OutputType.FILE);
         Path destinationPath = Paths.get(screenshotPath, fileName);
@@ -34,4 +35,11 @@ public class Screenshot {
         }
     }
 
+    public static void takeFullPageScreenshot(WebDriver webdriver, String screenshotPath, String fileName) {
+        try {
+            Shutterbug.shootPage(webdriver, Capture.FULL_SCROLL).save(screenshotPath + "\\" + fileName);
+        } catch (IOException e) {
+            System.err.println("Error occurred while saving the screenshot: " + e.getMessage());
+        }
+    }
 }

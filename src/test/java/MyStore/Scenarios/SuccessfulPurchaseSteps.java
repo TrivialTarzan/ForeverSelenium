@@ -123,6 +123,6 @@ public class SuccessfulPurchaseSteps {
         LocalDateTime currentDateTime = LocalDateTime.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd_HHmmss");
         String fileName = currentDateTime.format(formatter) + ".png";
-        Screenshot.takeScreenshot(driver, screenshotPath, fileName);
+        Screenshot.takeFullPageScreenshot(driver, screenshotPath, fileName);
     }
 }
