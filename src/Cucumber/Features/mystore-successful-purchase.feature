@@ -25,4 +25,3 @@ Feature: Performing successful/unsuccessful purchase
     Examples:
       |email               | password| productName                |discount|size |quantity| material| stock| price | paymentMethod   |
       |corruptedmind@die.net| Modulo | Hummingbird Printed Sweater| 20%     | M   | 5     | Cotton  | 1000 | 28.72 | Pay by Check    |
-#      |rabarbea@whatfor.com| Whatfor| Hummingbird Printed Sweater| 20%     | XL | 20     |         |      |       | Pay by bank wire|
