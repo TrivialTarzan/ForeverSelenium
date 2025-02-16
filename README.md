@@ -16,9 +16,10 @@ ForeverSelenium is a Java project using Selenium WebDriver with Gherkin/Cucumber
           - Scenarios 
           - Screenshots
           - WebDriverHooks
-          ... and the classes representing website pages
+          - ... and the classes representing website pages
         - RunTest.java
 
+## 
 
 | Directory/File | Description |
 | ------ | ------ |
