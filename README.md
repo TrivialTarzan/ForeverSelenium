@@ -3,8 +3,6 @@
 
 ForeverSelenium is a Java project using Selenium WebDriver with Gherkin/Cucumber for automated UI testing, integrating JUnit for test execution and Maven for dependency management.
 
-## Directory Structure
-
 ## Dir Tree
 
   - src
